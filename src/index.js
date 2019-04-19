@@ -11,12 +11,3 @@ console.log("old way: ", titlesOldWay);
 
 const titlesUsingLenses = L.get(L.prop("titles"), sampleTitles);
 console.log("optics way: ", titlesUsingLenses);
-
-// testing immutability -- getting ahead of ourselves..
-titlesOldWay[0].language = "what!";
-console.log("titlesOldWay mutated: ", titlesOldWay);
-console.log("hm.. sampleTitles: ", sampleTitles);
-
-// titlesUsingLenses[0].language = "moss";
-// console.log("titlesUsingLenses mutated: ", titlesUsingLenses);
-// console.log("hm.. sampleTitles: ", sampleTitles);
