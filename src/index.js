@@ -8,19 +8,18 @@ var sampleTitles = {
   ]
 };
 
-const divider = () => {
-  console.log("-----------------------------");
+const divider = msg => {
+  console.log(`\t>>>>>>>>${msg}`);
 };
 
-// get property using old way, and cool new way
+divider("get property using old way, and cool new way");
 const titlesOldWay = sampleTitles.titles;
 console.log("old way: ", titlesOldWay);
 const titlesUsingLenses = L.get(L.prop("titles"), sampleTitles);
 console.log("optics way: ", titlesUsingLenses);
-divider();
 
-// grab just the english title.
-const oldeEnglishTitle = sampleTitles.titles[0].text;
+divider("grab just the english title.");
+let oldeEnglishTitle = sampleTitles.titles[0].text;
 console.log("oldeEnglishTitle: ", oldeEnglishTitle);
 const newEnglish = L.get(
   L.compose(
@@ -31,4 +30,15 @@ const newEnglish = L.get(
   sampleTitles
 );
 console.log("hm.. newEnglish is so hard!: ", newEnglish);
-divider();
+
+divider("hm.. so can set it very easily too..");
+sampleTitles.titles[0].text = "green tees";
+console.log("changing original is bad: ", sampleTitles);
+const aLens = L.compose(
+  L.prop("titles"),
+  L.index(0),
+  L.prop("text")
+);
+const setted = L.set(aLens, "bsunny", sampleTitles);
+console.log("setted: ", setted);
+console.log("unchanged original: ", sampleTitles);
